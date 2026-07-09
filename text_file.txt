@@ -1,0 +1,172 @@
+===========================
+Employee Backend API Routes
+===========================
+
+Base URL
+--------
+http://localhost:3000
+
+
+--------------------------------
+Health Check
+--------------------------------
+
+GET /health
+
+Description:
+Checks whether the backend server is running.
+
+Response:
+{
+    "status": "OK",
+    "message": "Employee Backend Running"
+}
+
+
+--------------------------------
+Authentication
+--------------------------------
+
+POST /auth/login
+
+Description:
+Authenticates a user and returns an access token and refresh token.
+
+Request Body:
+{
+    "username": "admin",
+    "password": "admin123"
+}
+
+Response:
+{
+    "accessToken": "...",
+    "refreshToken": "...",
+    "user": {
+        "id": 1,
+        "username": "admin",
+        "role": "ADMIN"
+    }
+}
+
+
+--------------------------------
+
+POST /auth/refresh
+
+Description:
+Generates a new access token using a valid refresh token.
+
+Request Body:
+{
+    "refreshToken": "..."
+}
+
+Response:
+{
+    "accessToken": "..."
+}
+
+
+--------------------------------
+
+GET /auth/me
+
+Description:
+Returns the currently authenticated user.
+
+Headers:
+Authorization: Bearer <access_token>
+
+Response:
+{
+    "id": 1,
+    "username": "admin",
+    "role": "ADMIN"
+}
+
+
+--------------------------------
+Database (Temporary Debug Route)
+--------------------------------
+
+GET /db
+
+Description:
+Returns the complete contents of data/db.json.
+
+Purpose:
+Development and debugging only.
+Should be removed before production.
+
+
+--------------------------------
+Database Structure
+--------------------------------
+
+{
+    "users": [],
+    "employees": [],
+    "refreshTokens": []
+}
+
+
+--------------------------------
+Implemented Features
+--------------------------------
+
+✔ Express Server
+
+✔ Environment Variables (.env)
+
+✔ Morgan Request Logging
+
+✔ CORS
+
+✔ JSON Body Parsing
+
+✔ JWT Authentication
+
+✔ Refresh Tokens
+
+✔ Password Hashing (bcrypt)
+
+✔ JSON File Database
+
+✔ Database Read/Write Utilities
+
+✔ Seed Script
+
+✔ Protected Route Middleware
+
+
+--------------------------------
+Not Yet Implemented
+--------------------------------
+
+GET    /employees
+
+GET    /employees/:id
+
+POST   /employees
+
+PUT    /employees/:id
+
+DELETE /employees/:id
+
+GET    /employees?q=search
+
+GET    /employees?page=1&limit=10
+
+GET    /employees?sort=age&order=desc
+
+
+--------------------------------
+Default Credentials
+--------------------------------
+
+Username:
+admin
+
+Password:
+admin123
