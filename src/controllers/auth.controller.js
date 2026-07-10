@@ -36,6 +36,12 @@ export async function login(req, res) {
     db.refreshTokens.push(refreshToken);
 
     await writeDB(db);
+    // id: string;
+    // username:string;
+    // email:string;
+    // firstName:string;
+    // lastName:string;
+    // image:string;
 
     res.json({
         accessToken,
@@ -44,6 +50,10 @@ export async function login(req, res) {
             id: user.id,
             username: user.username,
             role: user.role,
+            email : user.email,
+            firstName : user.firstName,
+            lastName:user.lastName,
+            image : user.image
         },
     });
 }
