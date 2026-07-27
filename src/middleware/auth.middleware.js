@@ -1,25 +1,24 @@
 import { verifyToken } from "../utils/jwt.js";
 
 export default function authenticate(req, res, next) {
-    const header = req.headers.authorization;
+  const token = req.cookies.access_token;
 
-    if (!header) {
-        return res.status(401).json({
-            message: "Authorization header missing",
-        });
-    }
+  console.log("Cookies:", req.cookies);
+  if (!token) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
 
-    const token = header.split(" ")[1];
+  try {
+    const payload = verifyToken(token);
 
-    try {
-        const payload = verifyToken(token);
+    req.user = payload;
 
-        req.user = payload;
-
-        next();
-    } catch {
-        return res.status(401).json({
-            message: "Invalid or expired token",
-        });
-    }
+    next();
+  } catch {
+    return res.status(401).json({
+      message: "Invalid or expired token",
+    });
+  }
 }

@@ -7,9 +7,11 @@ export async function getEmployees(req, res) {
 
   const { q, sort, order = "asc" } = req.query;
 
+  console.log(`search request with params : q =${q}.  sort =${sort}. order=${order}` )
   // Search
   if (q) {
     const search = q.toLowerCase();
+    console.log("search request q : "+ q)
 
     employees = employees.filter(
       (employee) =>
